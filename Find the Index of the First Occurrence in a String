@@ -1,0 +1,6 @@
+class Solution {
+public:
+    int strStr(string str, string str1) {
+        return str.find(str1);
+    }
+};
