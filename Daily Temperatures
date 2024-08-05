@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> dailyTemperatures(vector<int>& nums) {
+        vector<int> arr(nums.size(), 0);
+        int n = nums.size();
+
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                arr[i] = 1;
+            } else {
+                int j = i + 1;
+                while (j < n && nums[i] >= nums[j]) {
+                    if (arr[j] > 0) {
+                        j += arr[j];
+                    } else {
+                        break;
+                    }
+                }
+
+                if (j < n && nums[i] < nums[j]) {
+                    arr[i] = j - i;
+                }
+            }
+        }
+
+        return arr;
+    }
+};
