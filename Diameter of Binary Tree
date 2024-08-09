@@ -18,7 +18,7 @@ public:
         } else {
             int lh = height(tree->left);
             int rh = height(tree->right);
-            return std::max(lh, rh) + 1;
+            return max(lh, rh) + 1;
         }
     }
 
@@ -26,12 +26,12 @@ public:
         if (tree == nullptr) {
             return 0;
         }
-        int leftHeight = height(tree->left);
-        int rightHeight = height(tree->right);
+        int l = height(tree->left);
+        int r = height(tree->right);
         
-        int leftDiameter = diameterOfBinaryTree(tree->left);
-        int rightDiameter = diameterOfBinaryTree(tree->right);
+        int ld = diameterOfBinaryTree(tree->left);
+        int rd = diameterOfBinaryTree(tree->right);
         
-        return std::max({leftDiameter, rightDiameter, leftHeight + rightHeight});
+        return max({ld,rd,l+r});
     }
 };
