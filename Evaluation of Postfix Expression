@@ -1,0 +1,45 @@
+class Solution
+{
+    public:
+    int priority(char x){
+        if(x=='+' || x=='-'){
+            return 1;
+        }
+        else if(x=='*' || x=='/'){
+            return 2;
+        }
+        else{
+            return 0;
+        }
+    }
+    
+    int evaluatePostfix(string S)
+    {
+        // Your code here
+        stack<int>st1;
+        for(auto &i : S){
+            if(i>='0' && i<='9'){
+                st1.push(i-'0');
+            }
+            else{
+                int a = st1.top();
+                st1.pop();
+                int b = st1.top();
+                st1.pop();
+                if(i=='+'){
+                    st1.push(b+a);
+                }
+                else if(i=='-'){
+                    st1.push(b-a);
+                }
+                else if(i=='*'){
+                    st1.push(b*a);
+                }
+                else if(i=='/'){
+                    st1.push(b/a);
+                }
+            }
+        }
+        return st1.top();
+    }
+};
