@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        if (n <= 2) {
+            return 0;
+        }
+
+        long long total = 0;
+        int left = 0, right = 0;
+        int leftp = 0, rightp = n - 1;
+
+        while (leftp < rightp) {
+            if (height[leftp] < height[rightp]) {
+                left = max(left, height[leftp]);
+                total += max(0, left - height[leftp]);
+                leftp++;
+            } else {
+                right = max(right, height[rightp]);
+                total += max(0, right - height[rightp]);
+                rightp--;
+            }
+        }
+        return total;
+    }
+};
