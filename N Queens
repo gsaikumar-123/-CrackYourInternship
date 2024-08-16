@@ -1,0 +1,57 @@
+class Solution {
+private:
+    vector<vector<string>> result;
+    vector<string> board;
+    int n;
+public:
+    bool issafe(int x, int y) {
+        for (int row = 0; row < x; row++) {
+            if (board[row][y] == 'Q') {
+                return false;
+            }
+        }
+
+        int row = x, col = y;
+        while (row >= 0 && col >= 0) {
+            if (board[row][col] == 'Q') {
+                return false;
+            }
+            row--;
+            col--;
+        }
+
+        row = x;
+        col = y;
+        while (row >= 0 && col < n) {
+            if (board[row][col] == 'Q') {
+                return false;
+            }
+            row--;
+            col++;
+        }
+        return true;
+    }
+
+    void backtrack(int x) {
+        if (x == n) {
+            result.push_back(board);
+            return;
+        }
+
+        for (int col = 0; col < n; col++) {
+            if (issafe(x, col)) {
+                board[x][col] = 'Q';
+                backtrack(x + 1);
+                board[x][col] = '.';
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int num) {
+        n = num;
+        string row(n, '.');
+        board = vector<string>(n, row);
+        backtrack(0);
+        return result;
+    }
+};
