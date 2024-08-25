@@ -1,0 +1,40 @@
+class Solution {
+public:
+    void gameOfLife(vector<vector<int>>& board) {
+        int r=board.size();
+        int c=board[0].size();
+
+        vector<vector<int>> newboard=board;
+    
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[i].size();j++){
+                int temp=0;
+
+                int dx[8]={0,0,1,1,1,-1,-1,-1}; 
+                int dy[8]={1,-1,0,1,-1,0,1,-1};
+
+                    for(int k=0;k<8;k++){
+                        int r1 = i+dx[k];
+                        int c1 = j+dy[k];
+
+                        if(r1<0 || r1>=r || c1<0 || c1>=c){continue;}
+
+                        if(board[r1][c1]==1){
+                            temp++;
+                        }
+                    }
+            
+                if(board[i][j]==1 && temp<2){
+                    newboard[i][j]=0;
+                }
+                if(board[i][j]==1 && temp>3){
+                    newboard[i][j]=0;
+                }
+                if(board[i][j]==0 && temp==3){
+                    newboard[i][j]=1;
+                }    
+            }
+        } 
+        board=newboard;   
+    }
+};
