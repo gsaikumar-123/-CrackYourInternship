@@ -1,0 +1,31 @@
+class Solution:
+    def getCount(self, n):
+        if n == 1:
+            return 10
+        
+        d = {
+            0: [0, 8],
+            1: [1, 2, 4],
+            2: [2, 1, 3, 5],
+            3: [3, 2, 6],
+            4: [4, 1, 5, 7],
+            5: [5, 2, 4, 6, 8],
+            6: [6, 3, 5, 9],
+            7: [7, 4, 8],
+            8: [8, 5, 7, 9, 0],
+            9: [9, 6, 8]
+        }
+        
+        dp = [[0] * 10 for _ in range(n)]
+        for i in range(10):
+            dp[0][i] = 1
+        
+        for i in range(1, n):
+            for j in range(10):
+                dp[i][j] = 0
+                for k in d[j]:
+                    dp[i][j] += dp[i-1][k]
+        
+        res = sum(dp[n-1][i] for i in range(10))
+        
+        return res
