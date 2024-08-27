@@ -1,0 +1,23 @@
+class Solution:
+    def equalPartition(self, N, arr):
+        # code here
+        if sum(arr)%2:
+            return False
+        
+        dp = set()
+        dp.add(0)
+        target = sum(arr)//2
+
+
+        for i in range(N-1,-1,-1):
+            newdp = set()
+            for j in dp:
+                newdp.add(j+arr[i])
+                newdp.add(j)
+            
+            dp = newdp
+
+        if target in dp:
+            return True 
+        else :
+            return False
