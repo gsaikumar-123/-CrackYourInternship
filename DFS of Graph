@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        vector<bool> visited(V, false);
+        vector<int>traversal;
+        dfs(0, adj, visited, traversal);
+        return traversal;
+    }
+
+    void dfs(int vertex, vector<int> adj[], vector<bool>&visited, vector<int>& traversal) {
+        visited[vertex] = true;
+        traversal.push_back(vertex);
+
+        for (int i : adj[vertex]) {
+            if (!visited[i]) {
+                dfs(i, adj, visited, traversal);
+            }
+        }
+    }
+};
